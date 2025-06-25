@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+  <h4 class="center-align">Batch Status Summary</h4>
+
+  <div class="row">
+    {% for s in stats %}
+    <div class="col s12 m6 l4">
+      <div class="card teal lighten-2">
+        <div class="card-content center-align">
+          <span class="card-title">{{ s.icon }} {{ s.name }}</span>
+          <h5>{{ s.count }} batch{{ '' if (s.count == 1 or s.count == 0) else 'es' }}</h5>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

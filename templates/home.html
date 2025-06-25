@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <form class="col s12" method="POST">
+      <div class="valign-wrapper">
+        <div class="input-field col s10 valign-wrapper">
+          <i class="material-icons prefix">search</i>
+          <input id="icon_prefix" type="text" name="search" value="{{ request.form.search or '' }}" />
+          <label for="icon_prefix">Search Batch...</label>
+        </div>
+        <div class="col s2 center-align">
+          <a class="btn-floating btn-large waves-effect waves-light teal lighten-2" href="{{ url_for('create_batch') }}">
+            <i class="material-icons">add</i>
+          </a>
+        </div>
+      </div>
+
+      <div class="row valign-wrapper">
+        <div class="col s4">
+          <select id="status" name="status">
+            <option value="">Status</option>
+            {% for s in status_options %}
+            <option value="{{ s.id }}" {% if request.form.status==s.id|string %}selected{% endif %}>{{ s.icon }} {{
+              s.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="input-field col s4">
+          <input id="date-filter" class="datepicker" name="date-filter" type="text" autocomplete="off"
+            value="{{ request.form.date or '' }}" />
+          <label for="date-filter" class="active">Date</label>
+        </div>
+        <div class="col s4">
+          <button class="btn waves-effect waves-light right" type="submit">
+            Filter <i class="material-icons right">filter_list</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="right-align">
+    <strong>TOTAL: </strong>{{ batches|length }}
+  </div>
+
+  <div class="divider"></div>
+
+  <br />
+
+  <!-- Grid layout (desktop/tablet) -->
+  <div class="hide-on-small-only">
+    <div class="card-grid">
+      {% for item in batches %}
+      <a href="{{ url_for('edit_batch', id=item.id) }}" class="square-card">
+        <div class="square-card-content">
+          <h3>{{ item.icon }}</h3>
+          <p>{{ item.code }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Collection layout (mobile) -->
+  <ul class="collection hide-on-med-and-up">
+    {% for item in batches %}
+    <li class="collection-item avatar left-align">
+      <a href="{{ url_for('edit_batch', id=item.id) }}">
+        <span class="circle" style="font-size: 2rem; line-height: 3.5rem">
+          {{ item.icon }}
+        </span>
+        <span class="title">{{ item.code }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Paginação -->
+  <div class="center-align">
+    <ul class="pagination">
+      <li class="{% if current_page == 1 %}disabled{% else %}waves-effect{% endif %}">
+        <a href="{{ url_for('home', page=current_page - 1) }}"><i class="material-icons">chevron_left</i></a>
+      </li>
+
+      {% for p in range(1, total_pages + 1) %}
+      <li class="{% if p == current_page %}active teal lighten-2{% else %}waves-effect{% endif %}">
+        <a href="{{ url_for('home', page=p) }}">{{ p }}</a>
+      </li>
+      {% endfor %}
+
+      <li class="{% if current_page == total_pages %}disabled{% else %}waves-effect{% endif %}">
+        <a href="{{ url_for('home', page=current_page + 1) }}"><i class="material-icons">chevron_right</i></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

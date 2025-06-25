@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container" style="margin-top: 32px;">
+  <div class="center-align">
+    <h5>Register User</h5>
+  </div>
+  <form action="{{ url_for('register') }}" method="POST" onsubmit="return concatenateAddress()">
+    <div class="input-field">
+      <input type="text" name="name" id="name" autocomplete="off" required />
+      <label for="name">Name</label>
+    </div>
+
+    <div class="input-field">
+      <input type="text" name="trade_name" id="trade_name" autocomplete="off" />
+      <label for="trade_name">Trade Name</label>
+    </div>
+
+    <div class="input-field">
+      <input type="text" name="cnpj" id="cnpj" autocomplete="off" />
+      <label for="cnpj">CNPJ</label>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s8">
+        <input type="text" name="cep" id="cep" autocomplete="off" required />
+        <label for="cep">CEP</label>
+      </div>
+      <div class="input-field col s4">
+        <input type="text" name="number" id="number" autocomplete="off" required />
+        <label for="number">Número</label>
+      </div>
+    </div>
+
+    <!-- Campo oculto -->
+    <input type="hidden" name="address" id="address" />
+
+    <div class="input-field">
+      <input type="email" name="email" id="email" autocomplete="off" required />
+      <label for="email">Email</label>
+    </div>
+
+    <div class="input-field">
+      <input type="password" name="pw" id="pw" autocomplete="off" required />
+      <label for="pw">Password</label>
+    </div>
+
+    <button type="submit" class="btn teal lighten-2">Register</button>
+  </form>
+</div>
+{% endblock %}

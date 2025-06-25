@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Batch Control{% endblock %}</title>
+
+  <!-- Fonts and CSS -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/boxes-on-pallet.png')}}">
+
+  {% block head %}{% endblock %}
+</head>
+
+<body>
+
+  {% if not hide_header %}
+  <!-- Header com abas -->
+  <nav>
+    <div class="nav-wrapper teal lighten-2">
+      <!-- Menu hambúrguer para telas menores -->
+      <a href="#" data-target="mobile-nav" class="sidenav-trigger show-on-medium-and-down">
+        <i class="material-icons">menu</i>
+      </a>
+
+      <!-- Logo (imagem + texto) -->
+      <a href="{{ url_for('home') }}" class="brand-logo"
+        style="display: flex; align-items: center; gap: 8px; padding-left: 16px;">
+        <img class="hide-on-small-only" src="{{ url_for('static', filename='images/boxes-on-pallet.png') }}" width="40" height="40" alt="Logo"
+          style="vertical-align: middle;" />
+        <span style="font-size: 1.5rem;">Batch Control</span>
+      </a>
+
+      <!-- Menu desktop -->
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Side Navigation para telas menores -->
+  <ul class="sidenav" id="mobile-nav">
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+    <li><a href="#">Profile</a></li>
+  </ul>
+
+  {% endif %}
+
+  <main id="content" class="container" style="margin-top: 24px;">
+    {% block content %}{% endblock %}
+  </main>
+
+  <br />
+
+  <footer class="page-footer teal lighten-2">
+    <div class="container">
+      <div class="row">
+        <div class="col s6">
+          <p class="white-text">© 2025 MGF Software</p>
+        </div>
+        <div class="col s6 right-align">
+          <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">
+            <img alt="Licença Creative Commons" style="border-width: 0"
+              src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+    // Inicializa o sidenav
+    document.addEventListener('DOMContentLoaded', function () {
+      const elems = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(elems);
+    });
+  </script>
+</body>
+
+</html>

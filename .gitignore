@@ -1,0 +1,5 @@
+.env
+storage.sqlite
+sql.log
+__pycache__/
+*.py[cod]

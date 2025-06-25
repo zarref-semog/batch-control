@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row valign-wrapper" style="margin-top: 40px;">
+        <div class="col s4center-align">
+            <img class="responsive-img" style="width: 150px;"
+                src="{{ url_for('static', filename='images/boxes-on-pallet.png') }}" />
+        </div>
+        <div class="col s8 left-align">
+            <h2 style="margin: 0;">Batch Control</h2>
+        </div>
+    </div>
+
+    <div class="row center-align">
+        <h5 class="teal-text">Please, login into your account</h5>
+    </div>
+
+
+    <div class="z-depth-1 grey lighten-4" style="padding: 32px 48px; border: 1px solid #EEE;">
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="validate" type="email" name="email" id="email" required />
+                    <label for="email">Enter your email</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="validate" type="password" name="pw" id="pw" required />
+                    <label for="pw">Enter your password</label>
+                </div>
+                <div class="col s12 right-align" style="margin-top: -10px;">
+                    <a class="pink-text" href="#!"><b>Forgot Password?</b></a>
+                </div>
+            </div>
+
+            <div class="row center-align">
+                <button type="submit" name="btn_login" class="btn btn-large waves-effect teal lighten-2 col s12">Login</button>
+            </div>
+        </form>
+
+
+    </div>
+    <br />
+    <div class="row center-align">
+        <a href="{{ url_for('register') }}">Create account</a>
+    </div>
+    <br />
+</div>
+{% endblock %}
