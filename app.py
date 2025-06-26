@@ -173,7 +173,7 @@ def create_batch():
 
     if request.method == "POST":
         images = [
-            save_resized_image(f)
+            save_resized_image(f, app.config["UPLOAD_FOLDER"])
             for f in request.files.getlist("new_images[]")
             if f.filename
         ]
@@ -238,7 +238,7 @@ def edit_batch(id):
                 pass
         for f in request.files.getlist("new_images[]"):
             if f.filename:
-                updated_images.append(save_resized_image(f))
+                updated_images.append(save_resized_image(f, ))
 
         form_data = {
             "code": request.form.get("code"),
